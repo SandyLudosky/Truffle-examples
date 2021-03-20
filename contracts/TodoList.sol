@@ -4,7 +4,8 @@ pragma solidity ^0.7.4;
 contract TodoList {
  uint public taskCount;
  event Add(string content);
- event Removed(string content);
+ event Removed(uint256 index);
+ event Toggled(uint256 index);
 
   struct Task {
     uint id;
@@ -20,6 +21,7 @@ contract TodoList {
   }
   function toggleTask(uint256 index) public {
     tasks[index].completed = !tasks[index].completed;
+    emit Toggled(index);
   }
   function removeTask(uint256 index) public {
       require(index < taskCount);

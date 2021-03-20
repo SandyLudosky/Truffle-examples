@@ -8,15 +8,19 @@ import {
 } from "../lib/actions/todolist";
 import "./App.css";
 
+const Loading = ({ isPending }) => {
+  return isPending && <p>Loading ...</p>;
+};
 const App = ({
   instance,
   items,
   error,
+  event,
   isPending,
+  readTasks,
   addTask,
   removeTask,
   toggleTask,
-  readTasks,
 }) => {
   const inputRef = useRef();
   const [todoInput, setTodoInput] = useState(null);
@@ -32,7 +36,7 @@ const App = ({
   };
 
   useEffect(() => readTasks(), []);
-  useEffect(() => readTasks(), [items]);
+  useEffect(() => readTasks(), [event?.transactionHash, event?.event]);
   return (
     <div className="container mt-5">
       <div className="row">
@@ -55,19 +59,31 @@ const App = ({
           </form>
         </div>
         <div className="mt-5 col-md-6 offset-3">
-          {items.map((item) => {
-            return (
-              <div className="d-flex justify-content-between align-items-center mb-2 border">
-                <p>{item.content}</p>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => removeTask(item.id)}
-                >
-                  delete
-                </button>
-              </div>
-            );
-          })}
+          <Loading isPending={isPending} />
+          {!isPending &&
+            items.map(({ completed, content, id }) => {
+              const btnClass = completed
+                ? "btn btn-sm btn-secondary"
+                : "btn btn-sm btn-success";
+
+              return (
+                <div className="d-flex justify-content-between align-items-center mb-2 border">
+                  <p className={`${completed ? "completed" : ""}`}>{content}</p>
+                  <div>
+                    <button className={btnClass} onClick={() => toggleTask(id)}>
+                      <i class="fas fa-check"></i>
+                    </button>
+                    &nbsp;
+                    <button
+                      className="btn btn-sm btn-danger"
+                      onClick={() => removeTask(id)}
+                    >
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
       <p className="footer">
@@ -78,6 +94,7 @@ const App = ({
 };
 
 const mapStateToProps = ({
+  contracts: { event },
   todolist: { instance, items, isPending, error },
 }) => {
   return {
@@ -85,6 +102,7 @@ const mapStateToProps = ({
     items,
     isPending,
     error,
+    event,
   };
 };
 const mapDispatchToProps = (dispatch) => ({

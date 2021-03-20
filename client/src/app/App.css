@@ -18,6 +18,10 @@ button[type="submit"] {
   padding: 10px;
   border-radius: 5px;
 }
+.completed {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
 p {
   padding: 0;
   margin: 0;

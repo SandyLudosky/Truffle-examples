@@ -61,9 +61,9 @@ const mapTasks = (count, contract) =>
   });
 
 export const readTasks = () => {
-  return async (dispatch, _, { instances: { TodoList }, admin }) => {
+  return (dispatch, _, { instances: { TodoList }, admin }) => {
     dispatch(transactionPending());
-    await TodoList.methods
+    TodoList.methods
       .taskCount()
       .call()
       .then((count) => mapTasks(count, TodoList))

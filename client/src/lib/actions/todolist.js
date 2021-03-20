@@ -26,15 +26,13 @@ const transactionError = (error) => {
     payload: { isPending: false, error },
   };
 };
-
-const readTasksAction = (items) => {
+const getTasks = (items) => {
   return {
     type: READ_TASKLIST,
     payload: { items },
   };
 };
-
-const addTaskAction = (content) => {
+const addTaskAction = () => {
   return {
     type: ADD_TASK,
   };
@@ -45,7 +43,6 @@ const removeTaskAction = (id) => {
     payload: { id },
   };
 };
-
 const toggleTaskAction = (id) => {
   return {
     type: TOGGLE_TASK,
@@ -53,17 +50,27 @@ const toggleTaskAction = (id) => {
   };
 };
 
+const mapTasks = (count, contract) =>
+  new Promise(async (resolve) => {
+    let list = [];
+    for (let i = 0; i < count; i++) {
+      const task = await contract.methods.tasks(i).call();
+      list.push(task);
+    }
+    resolve(list);
+  });
+
 export const readTasks = () => {
-  return (dispatch, _, { instances: { TodoList }, admin }) => {
+  return async (dispatch, _, { instances: { TodoList }, admin }) => {
     dispatch(transactionPending());
-    TodoList.methods
-      .tasks()
+    await TodoList.methods
+      .taskCount()
       .call()
-      .then((result) => {
-        dispatch(readTasksAction(result));
+      .then((count) => mapTasks(count, TodoList))
+      .then((items) => {
+        dispatch(getTasks(items));
         dispatch(transactionSuccess());
-      })
-      .catch(transactionError());
+      });
   };
 };
 export const addTask = (content) => {
@@ -72,10 +79,7 @@ export const addTask = (content) => {
     TodoList.methods
       .addTask(content)
       .send({ from: admin })
-      .then(() => {
-        dispatch(addTaskAction());
-        readTasks();
-      })
+      .then(() => dispatch(addTaskAction()))
       .catch(transactionError());
   };
 };
@@ -85,10 +89,7 @@ export const removeTask = (id) => {
     TodoList.methods
       .removeTask(id)
       .send({ from: admin })
-      .then(() => {
-        dispatch(removeTaskAction(id));
-        readTasks();
-      })
+      .then(() => dispatch(removeTaskAction(id)))
       .catch(transactionError());
   };
 };
@@ -98,10 +99,7 @@ export const toggleTask = (id) => {
     TodoList.methods
       .toggleTask(id)
       .send({ from: admin })
-      .then(() => {
-        dispatch(toggleTaskAction(id));
-        readTasks();
-      })
+      .then(() => dispatch(toggleTaskAction(id)))
       .catch(transactionError());
   };
 };

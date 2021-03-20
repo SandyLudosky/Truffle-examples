@@ -7,19 +7,13 @@ export const initialState = {
   error: null,
 };
 
-const greetings = (state = initialState, { type, payload }) => {
+const todolist = (state = initialState, { type, payload }) => {
   switch (type) {
     case DEPLOY:
       return {
         ...state,
         instance: payload.todolist.instance,
       };
-    case ADD_TASK: {
-      return {
-        ...state,
-        todolist: [...state.items, payload.task],
-      };
-    }
     default:
       return {
         ...state,
@@ -27,5 +21,4 @@ const greetings = (state = initialState, { type, payload }) => {
       };
   }
 };
-
-export default greetings;
+export default todolist;

@@ -2,7 +2,9 @@
 pragma solidity ^0.7.4;
 
 contract TodoList {
- uint taskCount;
+ uint public taskCount;
+ event Add(string content);
+ event Removed(string content);
 
   struct Task {
     uint id;
@@ -14,6 +16,7 @@ contract TodoList {
   function addTask(string memory _content) public {
     tasks[taskCount] = Task(taskCount, _content, false);
     taskCount ++;
+    emit Add(_content);
   }
   function toggleTask(uint256 index) public {
     tasks[index].completed = !tasks[index].completed;
@@ -23,5 +26,6 @@ contract TodoList {
       tasks[index] = tasks[taskCount-1];
       delete tasks[taskCount-1];
       taskCount--;
+      emit Removed(index);
   }
 }

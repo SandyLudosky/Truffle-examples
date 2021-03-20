@@ -62,7 +62,6 @@ const createWeb3Middleware = (contracts) => {
       .then((web3) => connectBlockchain(web3, contracts), handleErrors)
       .then((data) => subscribeEvents(data, dispatch), handleErrors)
       .then(({ web3, instances, accounts }) => {
-        debugger;
         if (typeof action === "function") {
           return action(dispatch, getState, {
             web3,

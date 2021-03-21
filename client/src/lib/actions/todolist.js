@@ -93,11 +93,12 @@ export const removeTask = (id) => {
       .catch(transactionError());
   };
 };
-export const toggleTask = (id) => {
+export const toggleTask = (id, bool) => {
+  console.log(bool);
   return (dispatch, _, { instances: { TodoList }, admin }) => {
     dispatch(transactionPending());
     TodoList.methods
-      .toggleTask(parseInt(id))
+      .toggleTask(parseInt(id), bool)
       .send({ from: admin })
       .then(() => dispatch(toggleTaskAction(id)))
       .catch(transactionError());

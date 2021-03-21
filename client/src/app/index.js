@@ -12,7 +12,6 @@ import "./App.css";
 const App = ({
   instance,
   items,
-  error,
   event,
   isPending,
   readTasks,
@@ -23,6 +22,9 @@ const App = ({
   const inputRef = useRef();
   const [todoInput, setTodoInput] = useState(null);
 
+  const handleOnCheck = (id, e) => {
+    toggleTask(id, e.target.checked);
+  };
   const handleOnChange = (e) => setTodoInput(e.target.value);
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +55,10 @@ const App = ({
               placeholder="enter todo"
               ref={inputRef}
             />
-            <button type="submit" className="col-md-2 offset-1">
+            <button
+              type="submit"
+              className="col-md-2 offset-1 btn btn-secondary"
+            >
               Submit
             </button>
           </form>
@@ -64,14 +69,26 @@ const App = ({
             const isCompleted = completed ? "completed" : null;
             return (
               <div
-                className="d-flex justify-content-between align-items-center mb-2 border"
+                className="d-flex justify-content-between align-items-center mb-2"
                 style={{ opacity: isPending ? "0.4" : "1" }}
               >
-                <p className={isCompleted}>{content}</p>
-                <div>
-                  <button onClick={() => toggleTask(id)}>✔️</button>
+                <p className={isCompleted}>
+                  <input
+                    type="checkbox"
+                    checked={completed}
+                    autocomplete="off"
+                    onChange={(e) => handleOnCheck(id, e)}
+                  />
                   &nbsp;
-                  <button onClick={() => removeTask(id)}>🚮</button>
+                  {content}
+                </p>
+                <div>
+                  <button
+                    className="btn btn-link"
+                    onClick={() => removeTask(id)}
+                  >
+                    delete
+                  </button>
                 </div>
               </div>
             );
@@ -100,7 +117,7 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) => ({
   readTasks: () => dispatch(readTasksAction()),
   addTask: (content) => dispatch(addTaskAction(content)),
-  toggleTask: (id) => dispatch(toggleTaskAction(id)),
+  toggleTask: (id, bool) => dispatch(toggleTaskAction(id, bool)),
   removeTask: (id) => dispatch(removeTaskAction(id)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(App);

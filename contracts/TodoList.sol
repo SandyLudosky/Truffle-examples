@@ -19,8 +19,8 @@ contract TodoList {
     taskCount ++;
     emit Add(_content);
   }
-  function toggleTask(uint256 index) public {
-    tasks[index].completed = !tasks[index].completed;
+  function toggleTask(uint256 index, bool completed) public {
+    tasks[index].completed = completed;
     emit Toggled(index);
   }
   function removeTask(uint256 index) public {

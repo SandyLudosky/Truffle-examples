@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { connect } from "react-redux";
 import {
   readTasks as readTasksAction,
@@ -6,11 +6,9 @@ import {
   removeTask as removeTaskAction,
   toggleTask as toggleTaskAction,
 } from "../lib/actions/todolist";
+import Spinner from "./Spinner";
 import "./App.css";
 
-const Loading = ({ isPending }) => {
-  return isPending && <p>Loading ...</p>;
-};
 const App = ({
   instance,
   items,
@@ -35,55 +33,49 @@ const App = ({
     inputRef.current.value = null;
   };
 
-  useEffect(() => readTasks(), []);
-  useEffect(() => readTasks(), [event?.transactionHash, event?.event]);
+  const readTasksCallback = useCallback(() => readTasks(), [readTasks]);
+  useEffect(() => readTasksCallback(), [readTasksCallback]);
+  useEffect(() => readTasksCallback(), [
+    readTasksCallback,
+    event?.transactionHash,
+    event?.event,
+  ]);
   return (
     <div className="container mt-5">
       <div className="row">
         <div className="col-md-6 offset-3">
           <h1>TodoList</h1>
-          <form onSubmit={handleOnSubmit} className="mtē">
+          <form onSubmit={handleOnSubmit} className="mt-5">
             <input
               type="text"
               className="col-form-label col-md-9 col-lg"
               onChange={handleOnChange}
-              placeholder="enter todo here"
+              placeholder="enter todo"
               ref={inputRef}
             />
-            <button
-              type="submit"
-              className="btn btn-secondary btn-lg col-md-2 offset-1"
-            >
+            <button type="submit" className="col-md-2 offset-1">
               Submit
             </button>
           </form>
         </div>
         <div className="mt-5 col-md-6 offset-3">
-          <Loading isPending={isPending} />
-          {!isPending &&
-            items.map(({ completed, content, id }) => {
-              const btnClass = completed
-                ? "btn btn-sm btn-secondary"
-                : "btn btn-sm btn-success";
-
-              return (
-                <div className="d-flex justify-content-between align-items-center mb-2 border">
-                  <p className={`${completed ? "completed" : ""}`}>{content}</p>
-                  <div>
-                    <button className={btnClass} onClick={() => toggleTask(id)}>
-                      <i class="fas fa-check"></i>
-                    </button>
-                    &nbsp;
-                    <button
-                      className="btn btn-sm btn-danger"
-                      onClick={() => removeTask(id)}
-                    >
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </div>
+          <Spinner />
+          {items.map(({ completed, content, id }) => {
+            const isCompleted = completed ? "completed" : null;
+            return (
+              <div
+                className="d-flex justify-content-between align-items-center mb-2 border"
+                style={{ opacity: isPending ? "0.4" : "1" }}
+              >
+                <p className={isCompleted}>{content}</p>
+                <div>
+                  <button onClick={() => toggleTask(id)}>✔️</button>
+                  &nbsp;
+                  <button onClick={() => removeTask(id)}>🚮</button>
                 </div>
-              );
-            })}
+              </div>
+            );
+          })}
         </div>
       </div>
       <p className="footer">

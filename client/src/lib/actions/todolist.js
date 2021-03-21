@@ -87,7 +87,7 @@ export const removeTask = (id) => {
   return (dispatch, _, { instances: { TodoList }, admin }) => {
     dispatch(transactionPending());
     TodoList.methods
-      .removeTask(id)
+      .removeTask(parseInt(id))
       .send({ from: admin })
       .then(() => dispatch(removeTaskAction(id)))
       .catch(transactionError());
@@ -97,7 +97,7 @@ export const toggleTask = (id) => {
   return (dispatch, _, { instances: { TodoList }, admin }) => {
     dispatch(transactionPending());
     TodoList.methods
-      .toggleTask(id)
+      .toggleTask(parseInt(id))
       .send({ from: admin })
       .then(() => dispatch(toggleTaskAction(id)))
       .catch(transactionError());

@@ -1,4 +1,4 @@
-import { DEPLOY, ADD_TASK } from "../actions/types";
+import { DEPLOY } from "../actions/types";
 
 export const initialState = {
   instance: null,

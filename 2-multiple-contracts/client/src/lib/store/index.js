@@ -9,8 +9,7 @@ const composeEnhancer =
     traceLimit: 25,
   }) || compose;
 
-const contractOptions = {
-  contracts: [SimpleStorage, Greetings] /* add contracts json here */,
-};
-const middlewares = applyMiddleware(web3Middleware(contractOptions.contracts));
+const contracts = [SimpleStorage, Greetings]; /* add contracts json here */
+
+const middlewares = applyMiddleware(web3Middleware(contracts));
 export default createStore(rootReducer, composeEnhancer(middlewares));

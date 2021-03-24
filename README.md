@@ -4,6 +4,7 @@
 
 1. TodoList
 2. Multiple contracts
+3. Multiple middlewares
 
 ## To install the box
 

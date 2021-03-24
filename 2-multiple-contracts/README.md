@@ -7,20 +7,13 @@ This box comes with everything you need to start using smart contracts from a re
 You will need to install Node.js and Truffle, as stated in the tutorial - see "Setting up the development environment".
 
 
-## To get this box ##
+## After unboxing
 
-1. Create a new directory.
-
-2. In the new directory, run ```truffle unbox SandyLudosky/react-redux-box```. This should pull the box contents to the new local directory.
-
-## After unboxing ##
-
-run :
+to install all req'd dependencies both in the root and client projects, you can run :
 
 ```
-npm install
+npm run install-pkg 
 ```
-
 
 In the main project directory:
 
@@ -28,17 +21,20 @@ In the main project directory:
 truffle develop
 ```
 
-Then, in the Truffle developer console: 
+Then, in the Truffle developer console:
+
 ```
 compile
 ```
 
 and then:
+
 ```
 migrate
 ```
 
 To test your smart contract(s), in truffle's developer console:
+
 ```
 test
 ```

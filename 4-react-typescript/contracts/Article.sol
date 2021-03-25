@@ -4,7 +4,7 @@ pragma solidity ^0.7.4;
 import "./Ownable.sol";
 
 contract Article is Ownable {
-  uint count;
+  uint public count;
 
   struct Article {
     uint id;

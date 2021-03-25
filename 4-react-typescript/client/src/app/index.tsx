@@ -1,24 +1,61 @@
-import React from "react";
-import "./App.css";
+import { useEffect } from "react";
+import { connect, ConnectedProps } from "react-redux";
+import {
+  add,
+  remove,
+  getArticles,
+} from "../lib/actions/articles/actionCreators";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Form from "./Form";
 
-function App() {
+interface RootState {
+  contracts: {
+    accounts: string[];
+    admin: Object;
+    event: Object;
+  };
+  articles: {
+    instance: Object;
+    event: Object;
+    isPending: boolean;
+    items: [];
+  };
+}
+
+const mapState = ({ articles }: RootState) => ({
+  isArticlesPending: articles.isPending,
+  items: articles.items,
+  event: articles.event,
+  instance: articles.instance,
+});
+
+const mapDispatch = {
+  readArticles: () => getArticles(),
+  addArticle: (article: IArticle) => add(article),
+  removeArticle: (id: number) => remove(id),
+};
+
+const connector = connect(mapState, mapDispatch);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function App({ readArticles, event }: PropsFromRedux) {
+  useEffect(() => {
+    readArticles();
+  }, []);
+  useEffect(() => {
+    readArticles();
+  }, [event]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container component="main" maxWidth="md">
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
+          <Form />
+        </Grid>
+        <Grid item xs={6}></Grid>
+      </Grid>
+    </Container>
   );
 }
 
-export default App;
+export default connector(App);

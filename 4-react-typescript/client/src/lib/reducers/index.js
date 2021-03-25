@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 import contracts from "./contracts";
-import storage from "./storage";
+import articles from "./articles";
 
 export default combineReducers({
-  storage,
+  articles,
   contracts,
   /* additional reducers here */
 });

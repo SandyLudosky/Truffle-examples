@@ -1,12 +1,15 @@
-import { DEPLOY, LOG_EVENT } from "../actions/types";
+import { DEPLOY, LOG_EVENT } from "../actions/contracts/actionTypes";
 
-export const initialState = {
+export const initialState: ContractState = {
   accounts: [],
-  admin: null,
-  event: null,
+  admin: Object.create(null),
+  event: Object.create(null),
 };
 
-const contracts = (state = initialState, { type, payload }) => {
+const contracts = (
+  state: ContractState = initialState,
+  { type, payload }: ArticleAction
+) => {
   switch (type) {
     case DEPLOY:
       return {

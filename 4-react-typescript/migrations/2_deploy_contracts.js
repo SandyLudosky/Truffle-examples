@@ -1,7 +1,5 @@
-var SimpleStorage = artifacts.require("SimpleStorage");
-var Greetings = artifacts.require("Greetings");
+var Article = artifacts.require("Article");
 
 module.exports = function (deployer) {
-  deployer.deploy(SimpleStorage);
-  deployer.deploy(Greetings, "Welcome to the Truffle box: react & redux");
+  deployer.deploy(Article);
 };

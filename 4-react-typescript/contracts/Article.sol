@@ -4,7 +4,7 @@ pragma solidity ^0.7.4;
 import "./Ownable.sol";
 
 contract Article is Ownable {
-  uint index;
+  uint count;
 
   struct Article {
     uint id;
@@ -17,15 +17,15 @@ contract Article is Ownable {
   event RemoveArticle(uint x);
   mapping(uint256 => Article) public articles;
 
-  function write(string title, string date, string content) public {
+  function write(string memory title, string memory date, string memory content) public {
     //Emit an event
-    articles[index] = new Article(index, title, date, content);
-    emit AddArticle(index);
+    articles[count] = Article(count, title, date, content);
+    emit AddArticle(count);
  
   }
-  function remove(uint index) public onlyOwner {
-      delete articles[_address];
-      emit RemoveArticle(index);
-      index++;
+  function remove(uint count) public onlyOwner {
+      delete articles[count];
+      emit RemoveArticle(count);
+      count--;
     }
 }

@@ -2,7 +2,7 @@ import { createStore, compose, applyMiddleware } from "redux";
 import rootReducer from "../reducers";
 import web3Middleware from "../middlewares/web3Middleware";
 import logger from "../middlewares/logger";
-import { SimpleStorage, Greetings } from "../../contracts";
+import { SimpleStorage } from "../../contracts/SimpleStorage.json";
 
 const composeEnhancer =
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
@@ -10,7 +10,7 @@ const composeEnhancer =
     traceLimit: 25,
   }) || compose;
 
-const contracts = [SimpleStorage, Greetings]; /* add contracts json here */
+const contracts = [SimpleStorage]; /* add contracts json here */
 
 const middlewares = [web3Middleware(contracts), logger()];
 export default createStore(

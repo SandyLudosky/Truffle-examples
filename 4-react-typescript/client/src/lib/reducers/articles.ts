@@ -1,8 +1,8 @@
 import { DEPLOY } from "../actions/contracts/actionTypes";
 
 export const initialState: ArticleState = {
-  instance: Object.create(null),
-  event: Object.create(null),
+  instance: null,
+  event: null,
   items: [],
   isPending: false,
 };

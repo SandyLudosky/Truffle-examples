@@ -17,11 +17,11 @@ contract Article is Ownable {
   event RemoveArticle(uint x);
   mapping(uint256 => Article) public articles;
 
-  function write(string memory title, string memory date, string memory content) public {
+  function write(string memory date, string memory title,  string memory content) public {
     //Emit an event
     articles[count] = Article(count, title, date, content);
     emit AddArticle(count);
- 
+    count++;
   }
   function remove(uint count) public onlyOwner {
       delete articles[count];

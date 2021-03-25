@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { connect, ConnectedProps } from "react-redux";
 import { useFormValidation } from "../../hooks/useFormValidation";
+import { add } from "../../lib/actions/articles/actionCreators";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -26,9 +28,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Form = () => {
+const mapDispatch = {
+  addArticle: (article: IArticleInput) => add(article),
+};
+const connector = connect(null, mapDispatch);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const Form = ({ addArticle }: PropsFromRedux) => {
   const classes = useStyles();
-  const initialValues = { title: null, content: null };
+  const initialValues = {
+    title: null,
+    content: null,
+  };
   const [article, setArticle] = useState({ ...initialValues });
   const { validate, isValid } = useFormValidation();
 
@@ -38,6 +49,11 @@ const Form = () => {
       [e.target.name]: e.target.value,
     }));
   };
+  const handleOnSubmit = (e: any) => {
+    e.preventDefault();
+    const newArticle: IArticleInput = { date: `${new Date()}`, ...article };
+    addArticle(newArticle);
+  };
   useEffect(() => {
     validate(article);
   }, [article, validate]);
@@ -46,7 +62,7 @@ const Form = () => {
       <Typography component="h1" variant="h5">
         Add Article
       </Typography>
-      <form className={classes.form} noValidate>
+      <form className={classes.form} noValidate onSubmit={handleOnSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -55,7 +71,7 @@ const Form = () => {
               required
               fullWidth
               id="title"
-              label="article title"
+              label="Title"
               name="title"
             />
           </Grid>
@@ -68,7 +84,7 @@ const Form = () => {
               multiline
               rows={4}
               id="content"
-              label="your article"
+              label="Your article"
               name="content"
             />
           </Grid>
@@ -87,4 +103,4 @@ const Form = () => {
     </div>
   );
 };
-export default Form;
+export default connector(Form);

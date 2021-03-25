@@ -1,8 +1,8 @@
 type ArticleState = {
-  instance: Object;
-  items: IArticle[];
+  instance: Object | null;
+  event: Object | null;
+  items: IArticleOutput[];
   isPending: boolean;
-  event: Object;
 };
 type ContractState = {
   accounts: string[];

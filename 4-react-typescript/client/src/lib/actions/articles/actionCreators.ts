@@ -29,7 +29,7 @@ const transactionError = (err: Object) => {
   return action;
 };
 
-const readArticles = (items: IArticle[]) => {
+const readArticles = (items: IArticleOutput[]) => {
   const action: ArticleAction = {
     type: READ_ARTICLES,
     payload: { items },
@@ -41,24 +41,23 @@ const mapArticles = (count: number, contract: any) =>
   new Promise(async (resolve) => {
     let list = [];
     for (let i = 0; i < count; i++) {
-      const task = await contract.methods.tasks(i).call();
+      const task = await contract.methods.articles(i).call();
       list.push(task);
     }
     resolve(list);
   });
 
-export const add = (article: IArticle) => {
-  return (
-    dispatch: DispatchType,
-    { instances: { Article } }: any,
-    admin: any
-  ) => {
+export const add = (article: IArticleInput) => {
+  debugger;
+  return (dispatch: DispatchType, { instances: { Article }, admin }: any) => {
     dispatch(transactionPending());
+    debugger;
     Article.methods
-      .set(article)
+      .write(article.date, article.title, article.content)
       .send({ from: admin })
       .then(() => {
         dispatch(transactionSuccess());
+        debugger;
       })
       .catch(transactionError);
   };
@@ -88,7 +87,7 @@ export const getArticles = () => {
       .count()
       .call()
       .then((count: number) => mapArticles(count, Article))
-      .then((items: IArticle[]) => {
+      .then((items: IArticleOutput[]) => {
         dispatch(readArticles(items));
         dispatch(transactionSuccess());
       })

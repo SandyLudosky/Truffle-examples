@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 import { connect, ConnectedProps } from "react-redux";
-import {
-  add,
-  remove,
-  getArticles,
-} from "../lib/actions/articles/actionCreators";
+import { remove, getArticles } from "../lib/actions/articles/actionCreators";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Form from "./Form";
@@ -32,7 +28,6 @@ const mapState = ({ articles }: RootState) => ({
 
 const mapDispatch = {
   readArticles: () => getArticles(),
-  addArticle: (article: IArticle) => add(article),
   removeArticle: (id: number) => remove(id),
 };
 
@@ -57,5 +52,4 @@ function App({ readArticles, event }: PropsFromRedux) {
     </Container>
   );
 }
-
 export default connector(App);

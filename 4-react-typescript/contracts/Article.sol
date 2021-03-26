@@ -23,9 +23,10 @@ contract Article is Ownable {
     emit AddArticle(count);
     count++;
   }
-  function remove(uint count) public onlyOwner {
-      delete articles[count];
-      emit RemoveArticle(count);
+  function remove(uint index) public onlyOwner {
+      articles[index] = articles[count-1];
+      delete articles[count-1];
+      emit RemoveArticle(index);
       count--;
     }
 }

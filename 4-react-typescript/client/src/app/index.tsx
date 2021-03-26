@@ -5,12 +5,13 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Form from "./Form";
 import List, { renderRow } from "./List";
+import contracts from "../lib/reducers/contracts";
 
 interface RootState {
   contracts: {
     accounts: string[];
     admin: Object;
-    event: Object;
+    event: any;
   };
   articles: {
     instance: Object;
@@ -27,12 +28,13 @@ interface IArticleProps {
   event: Object;
 }
 interface IArticleActionProps {
-  readArticles: () => void;
+  readArticles: () => any;
+  removeArticle: (id: number) => (index: number) => any;
 }
 
 type Props = IArticleProps & IArticleActionProps;
 
-function App({ readArticles, event, items }: Props) {
+function App({ readArticles, removeArticle, event, items }: Props) {
   useEffect(() => {
     readArticles();
   }, []);
@@ -47,7 +49,7 @@ function App({ readArticles, event, items }: Props) {
         </Grid>
         <Grid item xs={6}>
           <List items={items} heading="Articles">
-            {renderRow}
+            {(item) => renderRow(item, removeArticle)}
           </List>
         </Grid>
       </Grid>
@@ -55,16 +57,17 @@ function App({ readArticles, event, items }: Props) {
   );
 }
 
-const mapStateToProps = ({ articles }: RootState) => ({
+const mapStateToProps = ({ articles, contracts }: RootState) => ({
   isArticlesPending: articles.isPending,
   items: articles.items,
-  event: articles.event,
+  event: contracts.event?.transactionHash,
   instance: articles.instance,
 });
 
-function mapDispatchToProps(dispatch: DispatchType): IArticleActionProps {
+function mapDispatchToProps(dispatch: any): IArticleActionProps {
   return {
-    readArticles: () => getArticles(),
+    readArticles: () => dispatch(getArticles()),
+    removeArticle: (id: number) => dispatch(remove(id)),
   };
 }
 const mapDispatch = {};

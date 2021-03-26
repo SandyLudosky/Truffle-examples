@@ -16,4 +16,5 @@ const rootReactElement = (
   </React.StrictMode>
 );
 store.dispatch(deploy());
+export type AppDispatch = typeof store.dispatch;
 ReactDOM.render(rootReactElement, document.getElementById("root"));

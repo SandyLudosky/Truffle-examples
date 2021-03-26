@@ -1,4 +1,3 @@
-import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -23,37 +22,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface RootState {
-  contracts: {
-    accounts: string[];
-    admin: Object;
-    event: Object;
-  };
-  articles: {
-    instance: Object;
-    event: Object;
-    isPending: boolean;
-    items: IArticleOutput[];
-  };
-}
-
 interface IArticleProps {
   children(item: IArticleOutput): ReactElement;
   items: IArticleOutput[];
   heading: string;
 }
-interface IArticleActionProps {
-  someAction: () => void;
-}
-export function renderRow(item: IArticleOutput) {
+
+export function renderRow(
+  item: IArticleOutput,
+  actionOnClick: (id: number) => any
+) {
   return (
     <>
       <ListItem
         key={item.date}
-        role={undefined}
         dense
         button
-        onClick={() => null}
+        onClick={() => {
+          actionOnClick(item.id);
+          console.log(item.id);
+        }}
       >
         <ArticleCard {...item} />
       </ListItem>

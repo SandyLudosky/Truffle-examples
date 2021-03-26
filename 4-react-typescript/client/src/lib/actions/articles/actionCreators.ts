@@ -50,7 +50,6 @@ const mapArticles = (count: number, contract: any) =>
 export const add = (article: IArticleInput) => {
   return (dispatch: DispatchType, { instances: { Article }, admin }: any) => {
     dispatch(transactionPending());
-    debugger;
     Article.methods
       .write(article.date, article.title, article.content)
       .send({ from: admin })
@@ -62,11 +61,7 @@ export const add = (article: IArticleInput) => {
 };
 
 export const remove = (index: number) => {
-  return (
-    dispatch: DispatchType,
-    { instances: { Article } }: any,
-    admin: any
-  ) => {
+  return (dispatch: DispatchType, { instances: { Article }, admin }: any) => {
     dispatch(transactionPending());
     Article.methods
       .remove(index)

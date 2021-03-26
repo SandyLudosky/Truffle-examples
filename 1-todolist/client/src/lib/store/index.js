@@ -9,8 +9,7 @@ const composeEnhancer =
     traceLimit: 25,
   }) || compose;
 
-const contractOptions = {
-  contracts: [TodoList] /* add contracts json here */,
-};
-const middlewares = applyMiddleware(web3Middleware(contractOptions.contracts));
+const contracts = [TodoList]  /* add contracts json here */,
+
+const middlewares = applyMiddleware(web3Middleware(contracts));
 export default createStore(rootReducer, composeEnhancer(middlewares));

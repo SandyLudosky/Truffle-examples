@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "@truffle/hdwallet-provider": "^1.2.3",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "react-window": "^1.8.6"
   },
   "scripts": {
     "start": "cd client && npm start",

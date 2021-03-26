@@ -4,6 +4,7 @@ import { remove, getArticles } from "../lib/actions/articles/actionCreators";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Form from "./Form";
+import List, { renderRow } from "./List";
 
 interface RootState {
   contracts: {
@@ -15,26 +16,23 @@ interface RootState {
     instance: Object;
     event: Object;
     isPending: boolean;
-    items: [];
+    items: IArticleOutput[];
   };
 }
 
-const mapState = ({ articles }: RootState) => ({
-  isArticlesPending: articles.isPending,
-  items: articles.items,
-  event: articles.event,
-  instance: articles.instance,
-});
+interface IArticleProps {
+  isArticlesPending: boolean;
+  items: IArticleOutput[];
+  instance: Object;
+  event: Object;
+}
+interface IArticleActionProps {
+  readArticles: () => void;
+}
 
-const mapDispatch = {
-  readArticles: () => getArticles(),
-  removeArticle: (id: number) => remove(id),
-};
+type Props = IArticleProps & IArticleActionProps;
 
-const connector = connect(mapState, mapDispatch);
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function App({ readArticles, event }: PropsFromRedux) {
+function App({ readArticles, event, items }: Props) {
   useEffect(() => {
     readArticles();
   }, []);
@@ -47,9 +45,28 @@ function App({ readArticles, event }: PropsFromRedux) {
         <Grid item xs={6}>
           <Form />
         </Grid>
-        <Grid item xs={6}></Grid>
+        <Grid item xs={6}>
+          <List items={items} heading="Articles">
+            {renderRow}
+          </List>
+        </Grid>
       </Grid>
     </Container>
   );
 }
-export default connector(App);
+
+const mapStateToProps = ({ articles }: RootState) => ({
+  isArticlesPending: articles.isPending,
+  items: articles.items,
+  event: articles.event,
+  instance: articles.instance,
+});
+
+function mapDispatchToProps(dispatch: DispatchType): IArticleActionProps {
+  return {
+    readArticles: () => getArticles(),
+  };
+}
+const mapDispatch = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

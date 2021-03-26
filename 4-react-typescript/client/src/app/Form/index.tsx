@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  border: {
+    marginBottom: 20,
+    borderBottom: "1px solid #ccc",
+  },
 }));
 
 const mapDispatch = {
@@ -59,7 +63,7 @@ const Form = ({ addArticle }: PropsFromRedux) => {
   }, [article, validate]);
   return (
     <div className={classes.paper}>
-      <Typography component="h1" variant="h5">
+      <Typography component="h1" variant="h5" className={classes.border}>
         Add Article
       </Typography>
       <form className={classes.form} noValidate onSubmit={handleOnSubmit}>

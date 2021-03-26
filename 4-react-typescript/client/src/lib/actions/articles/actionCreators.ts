@@ -48,7 +48,6 @@ const mapArticles = (count: number, contract: any) =>
   });
 
 export const add = (article: IArticleInput) => {
-  debugger;
   return (dispatch: DispatchType, { instances: { Article }, admin }: any) => {
     dispatch(transactionPending());
     debugger;
@@ -57,7 +56,6 @@ export const add = (article: IArticleInput) => {
       .send({ from: admin })
       .then(() => {
         dispatch(transactionSuccess());
-        debugger;
       })
       .catch(transactionError);
   };

@@ -19,7 +19,7 @@ contract Article is Ownable {
 
   function write(string memory date, string memory title,  string memory content) public {
     //Emit an event
-    articles[count] = Article(count, title, date, content);
+    articles[count] = Article(count, date, title, content);
     emit AddArticle(count);
     count++;
   }

@@ -5,6 +5,7 @@
 1. TodoList
 2. Multiple contracts
 3. Multiple middlewares
+4. React Typescript
 
 ## To install the box
 

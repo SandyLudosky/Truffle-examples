@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import {
-  readTasks as readTasksAction,
-  addTask as addTaskAction,
-  removeTask as removeTaskAction,
-  toggleTask as toggleTaskAction,
-} from "../lib/actions/todolist";
+import * as tasksActions from "../lib/actions/todolist";
+import * as userActions from "../lib/actions/user";
+import { selectTasksCount } from "../lib/selectors/todolist";
 import Spinner from "./Spinner";
 import "./App.css";
 
@@ -14,10 +12,14 @@ const App = ({
   items,
   event,
   isPending,
+  isConnected,
+  count,
   readTasks,
   addTask,
   removeTask,
   toggleTask,
+  authenticate,
+  disconnect,
 }) => {
   const inputRef = useRef();
   const [todoInput, setTodoInput] = useState(null);
@@ -37,16 +39,26 @@ const App = ({
 
   const readTasksCallback = useCallback(() => readTasks(), [readTasks]);
   useEffect(() => readTasksCallback(), [readTasksCallback]);
-  useEffect(() => readTasksCallback(), [
-    readTasksCallback,
-    event?.transactionHash,
-    event?.event,
-  ]);
+  useEffect(
+    () => readTasksCallback(),
+    [readTasksCallback, event?.transactionHash, event?.event]
+  );
   return (
     <div className="container mt-5">
+      {!isConnected && (
+        <button className="btn btn-primary" onClick={authenticate}>
+          connect
+        </button>
+      )}
+      {isConnected && (
+        <button className="btn btn-danger" onClick={disconnect}>
+          disconnect
+        </button>
+      )}
       <div className="row">
         <div className="col-md-6 offset-3">
           <h1>TodoList</h1>
+          <p>&nbsp; {count}</p>
           <form onSubmit={handleOnSubmit} className="mt-5">
             <input
               type="text"
@@ -57,6 +69,7 @@ const App = ({
             />
             <button
               type="submit"
+              disabled={!isConnected}
               className="col-md-2 offset-1 btn btn-secondary"
             >
               Submit
@@ -102,22 +115,24 @@ const App = ({
   );
 };
 
-const mapStateToProps = ({
-  contracts: { event },
-  todolist: { instance, items, isPending, error },
-}) => {
+const mapStateToProps = (state) => {
+  const {
+    contracts: { event },
+    user: { account },
+    todolist: { instance, items, isPending, error },
+  } = state;
   return {
     instance,
     items,
     isPending,
     error,
     event,
+    isConnected: !!account,
+    count: selectTasksCount(state),
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  readTasks: () => dispatch(readTasksAction()),
-  addTask: (content) => dispatch(addTaskAction(content)),
-  toggleTask: (id, bool) => dispatch(toggleTaskAction(id, bool)),
-  removeTask: (id) => dispatch(removeTaskAction(id)),
+  ...bindActionCreators(tasksActions, dispatch),
+  ...bindActionCreators(userActions, dispatch),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import ArticleCard from "../Card";
 import { ReactElement } from "react";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: any) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",

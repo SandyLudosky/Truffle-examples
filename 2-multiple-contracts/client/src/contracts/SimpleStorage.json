@@ -42,18 +42,18 @@
       "constant": true
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.7.6+commit.7338295f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"x\",\"type\":\"uint256\"}],\"name\":\"Set\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"x\",\"type\":\"uint256\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/sandyinstructor/Documents/\\ud83d\\udc69\\ud83c\\udffd\\u200d\\ud83d\\udcbbBLOCKCHAIN/Alyra/truffle-box/truffle-box-react-redux/contracts/SimpleStorage.sol\":\"SimpleStorage\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/sandyinstructor/Documents/\\ud83d\\udc69\\ud83c\\udffd\\u200d\\ud83d\\udcbbBLOCKCHAIN/Alyra/truffle-box/truffle-box-react-redux/contracts/SimpleStorage.sol\":{\"keccak256\":\"0xa83002e021b0f708e5cfd0c02177ea1a9558cd21390a00bd3304c1b0c9fafe16\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f7028ccfda8e85b7dc3faeaf65154feef596bc699368acdd31dfdfe8e0e41d0f\",\"dweb:/ipfs/Qmdi34bMH2wrbvmbN5gLauEVUdBsviqXbFRGeLYv5HGX7h\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b5060fe8061001f6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146062575b600080fd5b606060048036036020811015604b57600080fd5b8101908080359060200190929190505050607e565b005b606860bf565b6040518082815260200191505060405180910390f35b806000819055507fdf7a95aebff315db1b7716215d602ab537373cdb769232aae6055c06e798425b816040518082815260200191505060405180910390a150565b6000805490509056fea2646970667358221220edd4b5e145dbbb452df6d76aaca509f97d4560d585f2619a0575b5b7f6e2b4dc64736f6c63430007060033",
-  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146062575b600080fd5b606060048036036020811015604b57600080fd5b8101908080359060200190929190505050607e565b005b606860bf565b6040518082815260200191505060405180910390f35b806000819055507fdf7a95aebff315db1b7716215d602ab537373cdb769232aae6055c06e798425b816040518082815260200191505060405180910390a150565b6000805490509056fea2646970667358221220edd4b5e145dbbb452df6d76aaca509f97d4560d585f2619a0575b5b7f6e2b4dc64736f6c63430007060033",
+  "metadata": "{\"compiler\":{\"version\":\"0.7.6+commit.7338295f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"x\",\"type\":\"uint256\"}],\"name\":\"Set\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"x\",\"type\":\"uint256\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/sandyinstructor/Documents/\\ud83d\\udc69\\ud83c\\udffd\\u200d\\ud83d\\udcbbBLOCKCHAIN/Alyra/truffle-box/truffle-box-examples/2-multiple-contracts/contracts/SimpleStorage.sol\":\"SimpleStorage\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/sandyinstructor/Documents/\\ud83d\\udc69\\ud83c\\udffd\\u200d\\ud83d\\udcbbBLOCKCHAIN/Alyra/truffle-box/truffle-box-examples/2-multiple-contracts/contracts/SimpleStorage.sol\":{\"keccak256\":\"0xa83002e021b0f708e5cfd0c02177ea1a9558cd21390a00bd3304c1b0c9fafe16\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f7028ccfda8e85b7dc3faeaf65154feef596bc699368acdd31dfdfe8e0e41d0f\",\"dweb:/ipfs/Qmdi34bMH2wrbvmbN5gLauEVUdBsviqXbFRGeLYv5HGX7h\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060fe8061001f6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146062575b600080fd5b606060048036036020811015604b57600080fd5b8101908080359060200190929190505050607e565b005b606860bf565b6040518082815260200191505060405180910390f35b806000819055507fdf7a95aebff315db1b7716215d602ab537373cdb769232aae6055c06e798425b816040518082815260200191505060405180910390a150565b6000805490509056fea26469706673582212208e1511c6d31e10aa5c5a7619b77355505a55af34cf843ddf5d7bdcca870f6cd864736f6c63430007060033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c806360fe47b11460375780636d4ce63c146062575b600080fd5b606060048036036020811015604b57600080fd5b8101908080359060200190929190505050607e565b005b606860bf565b6040518082815260200191505060405180910390f35b806000819055507fdf7a95aebff315db1b7716215d602ab537373cdb769232aae6055c06e798425b816040518082815260200191505060405180910390a150565b6000805490509056fea26469706673582212208e1511c6d31e10aa5c5a7619b77355505a55af34cf843ddf5d7bdcca870f6cd864736f6c63430007060033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
   "sourceMap": "57:255:2:-:0;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "57:255:2:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;146:90;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;240:70;;;:::i;:::-;;;;;;;;;;;;;;;;;;;146:90;193:1;180:10;:14;;;;225:6;229:1;225:6;;;;;;;;;;;;;;;;;;146:90;:::o;240:70::-;276:4;295:10;;288:17;;240:70;:::o",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.7.4;\n\ncontract SimpleStorage {\n  uint storedData;\n  //Declare an Event\n  event Set(uint x);\n\n  function set(uint x) public {\n    storedData = x;\n    //Emit an event\n    emit Set(x);\n  }\n\n  function get() public view returns (uint) {\n    return storedData;\n  }\n}\n",
-  "sourcePath": "/Users/sandyinstructor/Documents/👩🏽‍💻BLOCKCHAIN/Alyra/truffle-box/truffle-box-react-redux/contracts/SimpleStorage.sol",
+  "sourcePath": "/Users/sandyinstructor/Documents/👩🏽‍💻BLOCKCHAIN/Alyra/truffle-box/truffle-box-examples/2-multiple-contracts/contracts/SimpleStorage.sol",
   "ast": {
-    "absolutePath": "/Users/sandyinstructor/Documents/👩🏽‍💻BLOCKCHAIN/Alyra/truffle-box/truffle-box-react-redux/contracts/SimpleStorage.sol",
+    "absolutePath": "/Users/sandyinstructor/Documents/👩🏽‍💻BLOCKCHAIN/Alyra/truffle-box/truffle-box-examples/2-multiple-contracts/contracts/SimpleStorage.sol",
     "exportedSymbols": {
       "SimpleStorage": [
         100
@@ -397,7 +397,7 @@
   },
   "legacyAST": {
     "attributes": {
-      "absolutePath": "/Users/sandyinstructor/Documents/👩🏽‍💻BLOCKCHAIN/Alyra/truffle-box/truffle-box-react-redux/contracts/SimpleStorage.sol",
+      "absolutePath": "/Users/sandyinstructor/Documents/👩🏽‍💻BLOCKCHAIN/Alyra/truffle-box/truffle-box-examples/2-multiple-contracts/contracts/SimpleStorage.sol",
       "exportedSymbols": {
         "SimpleStorage": [
           100
@@ -814,12 +814,12 @@
         }
       },
       "links": {},
-      "address": "0x18d945f008eC669d48FB024d31523410B726fB21",
-      "transactionHash": "0x5aa041ce4c6762485031737d6c7572d5f37087ceae6385884532710df70def89"
+      "address": "0xC146C2b69CF2b109bF55643A2d3057D0e61A9593",
+      "transactionHash": "0x7098530bed13beb05f4aee043cf7b83c491c72e7fbe2bce64343be707501cbf6"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-03-20T11:09:22.529Z",
+  "updatedAt": "2021-05-25T22:58:26.135Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
